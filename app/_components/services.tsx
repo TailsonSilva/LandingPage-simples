@@ -4,7 +4,7 @@ import { PawPrint, CaretLeft, CaretRight, WhatsappLogo } from "@phosphor-icons/r
 import Slider from "react-slick"
 
 // --- 1. Componente de Seta para a Direita (Próximo) ---
-const NextArrow = (props) => {
+const NextArrow = (props:any) => {
     const { onClick } = props;
     return (
         <div
@@ -19,7 +19,7 @@ const NextArrow = (props) => {
 };
 
 // --- 2. Componente de Seta para a Esquerda (Anterior) ---
-const PrevArrow = (props) => {
+const PrevArrow = (props:any) => {
     const { onClick } = props;
     return (
         <div
