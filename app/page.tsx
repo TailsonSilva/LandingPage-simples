@@ -4,6 +4,8 @@ import { Services } from "./_components/services";
 import 'slick-carousel/slick/slick.css'; 
 import 'slick-carousel/slick/slick-theme.css';
 import './globals.css'; // Mantenha a importação do seu CSS global
+import { Testimonials } from "./_components/testmonials";
+import { Footer } from "./_components/footer";
 
 // ... o restante do seu componente Layout
 export default function Home() {
@@ -12,6 +14,8 @@ export default function Home() {
       <Hero/>
       <About/>
       <Services/>
+      <Testimonials/>
+      <Footer/>
     </main>
   )
 }

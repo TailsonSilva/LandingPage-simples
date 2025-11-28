@@ -23,7 +23,8 @@ export function Hero() {
                 <article className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
 
                     <div className='space-y-6'>
-                        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-10">
+                        <h1 
+                        className="text-3xl md:text-4xl lg:text-5xl font-bold leading-10">
                         Seu pet merece cuidado, carinho e atenção especial,
                         </h1>
                         <p className="lg:text-lg">
@@ -33,7 +34,8 @@ export function Hero() {
 
                         <div className="flex">
                             <a 
-                                href="#"
+                                target='_blank'
+                                href={'https://wa.me/00000000000?text=Olá vim pelo site e gostaria de mais informações'}
                                 className="bg-green-500 px-5 py-2 rounded-md font-semibold items-center justify-center gap-2"
                             >
                                 <WhatsappLogoIcon className='w-5 h-5'/>

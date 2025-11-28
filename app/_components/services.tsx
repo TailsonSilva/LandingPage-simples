@@ -1,6 +1,6 @@
 "use client"
 
-import { PawPrint, CaretLeft, CaretRight } from "@phosphor-icons/react/dist/ssr"
+import { PawPrint, CaretLeft, CaretRight, WhatsappLogo } from "@phosphor-icons/react/dist/ssr"
 import Slider from "react-slick"
 
 // --- 1. Componente de Seta para a Direita (Próximo) ---
@@ -40,27 +40,31 @@ const services = [
         title: "Consulta Veterinária",
         description: "Exames de rotina, vacinação e diagnóstico completo para a saúde do seu pet.",
         icon: PawPrint,
-        color: "text-blue-500",
+        color: "text-blue-400",
     },
     {
         title: "Banho e Tosa",
         description: "Higiene completa e tosa especializada em um ambiente seguro e relaxante.",
         icon: PawPrint,
-        color: "text-green-500",
+        color: "text-green-400",
     },
     {
         title: "Produtos Premium",
         description: "As melhores rações, suplementos e acessórios do mercado.",
         icon: PawPrint,
-        color: "text-yellow-500",
+        color: "text-yellow-400",
     },
     {
         title: "Day Care & Hotel",
         description: "Espaço seguro e divertido para seu pet passar o dia ou as férias.",
         icon: PawPrint,
-        color: "text-purple-500",
+        color: "text-purple-400",
     },
 ];
+
+// --- 4. CONFIGURAÇÃO DE CONTATO ---
+// IMPORTANTE: Mude SEU_NUMERO_AQUI para o número de telefone completo (ex: 5511999998888)
+const WHATSAPP_NUMBER = "5511999998888"; 
 
 export function Services () {
     const settings = {
@@ -96,9 +100,9 @@ export function Services () {
     };
 
     return(
-        // A seção não tem cor de fundo própria (herda o bg-bege do About)
+        // Fundo da seção definido como branco (mantendo sua alteração)
         <section className="bg-white py-16 mt-16">
-            <div className="bg-white container mx-auto px-4">
+            <div className="container mx-auto px-4">
                 <div className="mb-12 text-center">
                     <h2 className="text-4xl font-bold text-black">Nossos serviços</h2>
                     <p className="text-gray-600 mt-2">Cuidado completo para o seu melhor amigo.</p>
@@ -106,23 +110,43 @@ export function Services () {
 
                 {/* Container do Carrossel */}
                 <Slider {...settings}>
-                    {services.map((item, index) => (
-                        <div key={index} className="px-3"> 
-                            {/* Fundo branco e texto escuro para legibilidade */}
-                            <article className="bg-[#1e293b] text-black rounded-2xl p-6 space-y-4 h-full flex flex-col shadow-lg">
-                                
-                                {/* Ícone do Serviço */}
-                                <item.icon className={`w-10 h-10 ${item.color}`} weight="fill" /> 
-                                
-                                {/* Título */}
-                                <h3 className="text-xl font-semibold text-white">{item.title}</h3>
-                                
-                                {/* Descrição */}
-                                <p className="text-white">{item.description}</p>
+                    {services.map((item, index) => {
+                        // Constrói a mensagem automática do WhatsApp
+                        const whatsappMessage = encodeURIComponent(`Olá, gostaria de saber mais sobre o serviço de ${item.title}.`);
+                        const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`;
+                        
+                        return (
+                            <div key={index} className="px-3"> 
+                                {/* Fundo do cartão em azul-escuro */}
+                                <article className="bg-[#1e293b] text-white rounded-2xl p-6 space-y-4 h-full flex flex-col shadow-lg">
+                                    
+                                    {/* Ícone do Serviço */}
+                                    <item.icon className={`w-10 h-10 ${item.color}`} weight="fill" /> 
+                                    
+                                    {/* Título */}
+                                    <h3 className="text-xl font-semibold text-white">{item.title}</h3>
+                                    
+                                    {/* Descrição */}
+                                    <p className="text-gray-300">{item.description}</p>
+                                    
+                                    {/* BOTÃO WHATSAPP */}
+                                    <a
+                                        target='_blank'
+                                        href={'https://wa.me/00000000000?text=Olá vim pelo site e gostaria de mais informações sobre ${item.title}'}
+                                        rel="noopener noreferrer"
+                                        className="mt-4 inline-flex items-center justify-center gap-2 
+                                                   bg-green-500 text-white font-medium px-4 py-2 
+                                                   rounded-lg transition duration-300 
+                                                   hover:bg-green-600"
+                                    >
+                                        <WhatsappLogo className="w-5 h-5" weight="bold" />
+                                        Solicitar
+                                    </a>
 
-                            </article>
-                        </div>
-                    ))}
+                                </article>
+                            </div>
+                        );
+                    })}
                 </Slider>
                 
             </div>
