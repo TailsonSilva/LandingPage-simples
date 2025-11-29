@@ -1,11 +1,14 @@
 "use client"
 
 import { Star, CaretLeft, CaretRight, Quotes } from "@phosphor-icons/react/dist/ssr"
-import Slider from "react-slick"
+import Slider, { CustomArrowProps } from "react-slick"
 import tutor1 from '../../public/images/tutor1.png'
 import tutor2 from '../../public/images/tutor2.jpg'
 import tutor3 from '../../public/images/tutor3.jpg'
 import Image from "next/image"
+import React from "react"
+
+interface ArrowProps extends CustomArrowProps {}
 
 // --- 1. Dados dos Depoimentos ---
 const TESTIMONIALS = [
@@ -33,7 +36,7 @@ const TESTIMONIALS = [
 ];
 
 // --- 2. Componentes de Seta (Adaptados para o novo layout) ---
-const NextArrow = (props) => {
+const NextArrow = (props: ArrowProps) => {
     const { onClick } = props;
     return (
         <div
@@ -45,7 +48,7 @@ const NextArrow = (props) => {
     );
 };
 
-const PrevArrow = (props) => {
+const PrevArrow = (props: ArrowProps) => {
     const { onClick } = props;
     return (
         <div
@@ -58,7 +61,7 @@ const PrevArrow = (props) => {
 };
 
 // --- Função para Renderizar Estrelas (Visual simples) ---
-const renderStars = (rating) => {
+const renderStars = (rating: number) => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
         stars.push(

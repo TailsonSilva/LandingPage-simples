@@ -8,7 +8,7 @@ export function About () {
         <section className="bg-[#FDF6ec] py-16">
             <div className="container px-4 mx-auto">
                 {/* 1. O grid é definido aqui: 1 coluna por padrão, 2 colunas no 'lg' (desktop)
-                  2. A classe 'items-center' garante que as colunas fiquem alinhadas no centro verticalmente.
+                 2. A classe 'items-center' garante que as colunas fiquem alinhadas no centro verticalmente.
                 */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     
@@ -27,7 +27,7 @@ export function About () {
                         </div>
 
                         <div className="absolute w-40 h-40 right-4 -bottom-8 border-4 
-                        overflow-hidden rounded-lg border-white">
+                         overflow-hidden rounded-lg border-white">
                             <Image
                                 src={about2Img}
                                 alt="Foto do Cachorro 2"
@@ -39,7 +39,7 @@ export function About () {
                     </div>
 
                     {/* COLUNA 2: TEXTO E BOTÕES 
-                      (Este div deve ser o segundo item dentro do grid container)
+                     (Este div deve ser o segundo item dentro do grid container)
                     */}
                     <div className="space-y-6 mt-10 lg:mt-0"> 
                         <h2 className="text-4xl font-bold text-black">SOBRE</h2>
@@ -70,18 +70,18 @@ export function About () {
                             </li>
                         </ul>
 
-                       <div className="flex gap-2 flex-wrap">
+                        <div className="flex gap-2 flex-wrap">
                             <a 
                                 target='_blank'
                                 href={'https://wa.me/00000000000?text=Olá vim pelo site e gostaria de mais informações'}
-                                className="bg-[#E84C3D] text-white flex items-center justify-center w-fit gap-2 px-4 py-2 rounded-md"
+                                className="bg-[#E84C3D] text-white flex items-center justify-center w-fit gap-2 px-4 py-2 rounded-md focus:outline-none" // 🚨 ADICIONADO
                             >
                                 <WhatsappLogo className="w-5 h-5 text-white" />
                                 Contato via WhatsApp
                             </a>
 
                             <a href="#"
-                                className="bg-[#E84C3D] text-white flex items-center justify-center w-fit gap-2 px-4 py-2 rounded-md"
+                                className="bg-[#E84C3D] text-white flex items-center justify-center w-fit gap-2 px-4 py-2 rounded-md focus:outline-none" // 🚨 ADICIONADO
                             >
                                 {/* CORRIGIDO: O MapPin estava com text-black, troquei para text-white */}
                                 <MapPin className="w-5 h-5 text-white" />

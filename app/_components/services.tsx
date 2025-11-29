@@ -1,34 +1,48 @@
 "use client"
 
 import { PawPrint, CaretLeft, CaretRight, WhatsappLogo } from "@phosphor-icons/react/dist/ssr"
-import Slider from "react-slick"
+import Slider, { CustomArrowProps } from "react-slick" // 
+import React from "react";
 
-// --- 1. Componente de Seta para a Direita (Próximo) ---
-const NextArrow = (props:any) => {
-    const { onClick } = props;
+interface ArrowProps extends CustomArrowProps {}
+
+
+
+const NextArrow = (props: ArrowProps) => {
+    
+    const { onClick, className } = props; 
+    
     return (
         <div
-            // Posiciona a seta absolutamente no centro (vertical) à direita
-            className="absolute top-1/2 -translate-y-1/2 right-0 z-10 cursor-pointer"
+            
+            className=" bg-white rounded-md absolute top-1/2 -translate-y-1/2 right-0 z-10 cursor-pointer"
             onClick={onClick}
         >
             {/* Seta vermelha customizada */}
-            <CaretRight className="w-8 h-8 text-red-500 hover:text-[#E84C3D] transition duration-200" weight="bold" />
+            <CaretRight 
+                className="w-8 h-8 text-red-500 hover:text-[#E84C3D] transition duration-200" 
+                weight="bold" 
+            />
         </div>
     );
 };
 
 // --- 2. Componente de Seta para a Esquerda (Anterior) ---
-const PrevArrow = (props:any) => {
+// Note que o tipo agora é CustomArrowProps
+const PrevArrow = (props: ArrowProps) => {
     const { onClick } = props;
+    
     return (
         <div
             // Posiciona a seta absolutamente no centro (vertical) à esquerda
-            className="absolute top-1/2 -translate-y-1/2 left-0 z-10 cursor-pointer"
+            className="bg-white rounded-md absolute top-1/2 -translate-y-1/2 left-0 z-10 cursor-pointer"
             onClick={onClick}
         >
             {/* Seta vermelha customizada */}
-            <CaretLeft className="w-8 h-8 text-red-500 hover:text-[#E84C3D] transition duration-200" weight="bold" />
+            <CaretLeft 
+                className="w-8 h-8 text-red-500 hover:text-[#E84C3D] transition duration-200" 
+                weight="bold" 
+            />
         </div>
     );
 };
@@ -78,7 +92,8 @@ export function Services () {
         
         // Aplica as setas customizadas
         arrows: true,
-        nextArrow: <NextArrow />,
+        
+        nextArrow: <NextArrow />, 
         prevArrow: <PrevArrow />,
 
         responsive: [
@@ -109,46 +124,53 @@ export function Services () {
                 </div>
 
                 {/* Container do Carrossel */}
-                <Slider {...settings}>
-                    {services.map((item, index) => {
-                        // Constrói a mensagem automática do WhatsApp
-                        const whatsappMessage = encodeURIComponent(`Olá, gostaria de saber mais sobre o serviço de ${item.title}.`);
-                        const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`;
-                        
-                        return (
-                            <div key={index} className="px-3"> 
-                                {/* Fundo do cartão em azul-escuro */}
-                                <article className="bg-[#1e293b] text-white rounded-2xl p-6 space-y-4 h-full flex flex-col shadow-lg">
-                                    
-                                    {/* Ícone do Serviço */}
-                                    <item.icon className={`w-10 h-10 ${item.color}`} weight="fill" /> 
-                                    
-                                    {/* Título */}
-                                    <h3 className="text-xl font-semibold text-white">{item.title}</h3>
-                                    
-                                    {/* Descrição */}
-                                    <p className="text-gray-300">{item.description}</p>
-                                    
-                                    {/* BOTÃO WHATSAPP */}
-                                    <a
-                                        target='_blank'
-                                        href={'https://wa.me/00000000000?text=Olá vim pelo site e gostaria de mais informações sobre ${item.title}'}
-                                        rel="noopener noreferrer"
-                                        className="mt-4 inline-flex items-center justify-center gap-2 
-                                                   bg-green-500 text-white font-medium px-4 py-2 
-                                                   rounded-lg transition duration-300 
-                                                   hover:bg-green-600"
-                                    >
-                                        <WhatsappLogo className="w-5 h-5" weight="bold" />
-                                        Solicitar
-                                    </a>
+                <div className="relative"> {/* Adicionando relative para o posicionamento das setas */}
+                    <Slider {...settings}>
+                        {services.map((item, index) => {
+                            // Constrói a mensagem automática do WhatsApp
+                            const whatsappMessage = encodeURIComponent(`Olá, gostaria de saber mais sobre o serviço de ${item.title}.`);
+                            const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`;
+                            
+                            return (
+                                <div key={index} className="px-3"> 
+                                    {/* Fundo do cartão em azul-escuro */}
+                                    <article className="bg-[#1e293b] text-white rounded-2xl p-6 space-y-4 h-full flex flex-col shadow-lg">
+                                        
+                                        {/* Ícone do Serviço */}
+                                        <item.icon className={`w-10 h-10 ${item.color}`} weight="fill" /> 
+                                        
+                                        {/* Título */}
+                                        <h3 className="text-xl font-semibold text-white">{item.title}</h3>
+                                        
+                                        {/* Descrição */}
+                                        <p className="text-gray-300">{item.description}</p>
+                                        
+                                        {/* BOTÃO WHATSAPP */}
+                                        <a
+                                            target='_blank'
+                                            // Corrigido o link para usar o WHATSAPP_NUMBER e a mensagem construída
+                                            href={whatsappLink} 
+                                            rel="noopener noreferrer"
+                                            className="mt-4 inline-flex items-center justify-center gap-2 
+                                                        bg-green-500 text-white font-medium px-4 py-2 
+                                                        rounded-lg transition duration-300 
+                                                        hover:bg-green-600"
+                                        >
+                                            <WhatsappLogo className="w-5 h-5" weight="bold" />
+                                            Solicitar
+                                        </a>
 
-                                </article>
-                            </div>
-                        );
-                    })}
-                </Slider>
+                                    </article>
+                                </div>
+                            );
+                        })}
+                    </Slider>
+                </div>
                 
+                {/* Opcional: Adicionado uma pequena nota sobre o número para o usuário ver no código */}
+                <p className="text-center text-sm text-gray-400 mt-8">
+                    * Lembre-se de substituir o número de WhatsApp no código para que o botão funcione corretamente.
+                </p>
             </div>
         </section>
     )
