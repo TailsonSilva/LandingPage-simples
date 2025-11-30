@@ -1,176 +1,108 @@
 "use client"
 
-import { PawPrint, CaretLeft, CaretRight, WhatsappLogo } from "@phosphor-icons/react/dist/ssr"
-import Slider, { CustomArrowProps } from "react-slick" // 
-import React from "react";
+import React from "react"
+import useEmblaCarousel from "embla-carousel-react"
+import { Scissors, Syringe, CarTaxiFront, Hotel, Icon } from 'lucide-react'
+import { Card, CardContent } from "@/components/ui/card"
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+} from "@/components/ui/carousel"
+import { WhatsappLogoIcon } from "@phosphor-icons/react/dist/ssr"
+import { title } from "process"
 
-interface ArrowProps extends CustomArrowProps {}
-
-
-
-const NextArrow = (props: ArrowProps) => {
-    
-    const { onClick, className } = props; 
-    
-    return (
-        <div
-            
-            className=" bg-white rounded-md absolute top-1/2 -translate-y-1/2 right-0 z-10 cursor-pointer"
-            onClick={onClick}
-        >
-            {/* Seta vermelha customizada */}
-            <CaretRight 
-                className="w-8 h-8 text-red-500 hover:text-[#E84C3D] transition duration-200" 
-                weight="bold" 
-            />
-        </div>
-    );
-};
-
-// --- 2. Componente de Seta para a Esquerda (Anterior) ---
-// Note que o tipo agora é CustomArrowProps
-const PrevArrow = (props: ArrowProps) => {
-    const { onClick } = props;
-    
-    return (
-        <div
-            // Posiciona a seta absolutamente no centro (vertical) à esquerda
-            className="bg-white rounded-md absolute top-1/2 -translate-y-1/2 left-0 z-10 cursor-pointer"
-            onClick={onClick}
-        >
-            {/* Seta vermelha customizada */}
-            <CaretLeft 
-                className="w-8 h-8 text-red-500 hover:text-[#E84C3D] transition duration-200" 
-                weight="bold" 
-            />
-        </div>
-    );
-};
-
-
-// --- 3. Array de Dados dos Serviços ---
 const services = [
     {
+        title: "banho & Tosa ",
+        description: "Inclui banho com produtos específicos para todo tipo de pelagem do animal.",
+        duration: "1h",
+        price: "R$ 50",
+        icon: <Scissors className="w-8 h-8 text-blue-400"/>
+        
+    },
+    {
         title: "Consulta Veterinária",
-        description: "Exames de rotina, vacinação e diagnóstico completo para a saúde do seu pet.",
-        icon: PawPrint,
-        color: "text-blue-400",
+        description: "Oferece atendimento clíbico básico ou especializado para cuidar da saíde do animal.",
+        duration: "1h",
+        price: "R$ 45",
+        icon: <Syringe className="w-8 h-8 text-blue-400"/>
     },
     {
-        title: "Banho e Tosa",
-        description: "Higiene completa e tosa especializada em um ambiente seguro e relaxante.",
-        icon: PawPrint,
-        color: "text-green-400",
+        title: "Táxi Pet",
+        description: "Serviço de transporte para levar e buscar os pets no petshop.",
+        duration: "2h",
+        price: "R$ 100",
+        icon: <CarTaxiFront className="w-8 h-8 text-blue-400"/>
+        
     },
     {
-        title: "Produtos Premium",
-        description: "As melhores rações, suplementos e acessórios do mercado.",
-        icon: PawPrint,
-        color: "text-yellow-400",
+        title: "Hotel para pets ",
+        description: "Serviço de hospedagem para animais de estimação, ideal para qaundo tutores precisam viajar ou se ausentar por alguns dias.",
+        duration: "1h",
+        price: "R$ 120",
+        icon: <Hotel className="w-8 h-8 text-blue-400"/>
+        
     },
-    {
-        title: "Day Care & Hotel",
-        description: "Espaço seguro e divertido para seu pet passar o dia ou as férias.",
-        icon: PawPrint,
-        color: "text-purple-400",
-    },
-];
+]
 
-// --- 4. CONFIGURAÇÃO DE CONTATO ---
-// IMPORTANTE: Mude SEU_NUMERO_AQUI para o número de telefone completo (ex: 5511999998888)
-const WHATSAPP_NUMBER = "5511999998888"; 
-
-export function Services () {
-    const settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 3, 
+export function Services() {
+    const [emblaRef, emblaApi] = useEmblaCarousel({
+        loop: false,
+        align: "start",
         slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 3000,
-        
-        // Aplica as setas customizadas
-        arrows: true,
-        
-        nextArrow: <NextArrow />, 
-        prevArrow: <PrevArrow />,
-
-        responsive: [
-            {
-                breakpoint: 1024, 
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                }
-            },
-            {
-                breakpoint: 600, 
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            }
-        ]
-    };
+        breakpoints: {
+            "(min-width: 756px)": {slidesToScroll: 3 }
+        }
+    })
 
     return(
-        // Fundo da seção definido como branco (mantendo sua alteração)
-        <section className="bg-white py-16 mt-16">
+        <section className="bg-white py-16">
             <div className="container mx-auto px-4">
-                <div className="mb-12 text-center">
-                    <h2 className="text-4xl font-bold text-black">Nossos serviços</h2>
-                    <p className="text-gray-600 mt-2">Cuidado completo para o seu melhor amigo.</p>
-                </div>
+                <div className="mb-12">
+                    <h2 className="text-4xl font-bold mb-8 text-gray-800">Serviços</h2>
+                    <div>
+                        <Carousel 
+                            className="bg-[#1e293b] text-white rounded-2xl p-6 h-full"
+                            opts={{
+                                loop: false,
+                                align: "start",
+                                slidesToScroll: 1,
+                            }}
+                        >
+                            <CarouselContent className="-ml-4">
+                                    {services.map((service, index) => (
+                                    <CarouselItem 
+                                        key={index}
+                                        className="pl-4 basis-full md:basis-1/2"
+                                    >
+                                            <Card className="bg-gray-800 text-white border-none shadow-lg h-full transition duration-300 hover:bg-gray-700">
+                                                <CardContent className="flex flex-col p-6 space-y-4 h-full justify-between">
+                                                    <div className="flex items-center space-x-4">
+                                                        <div className="p-3 bg-blue-600/20 rounded-full">
+                                                            {service.icon}
+                                                        </div>
+                                                        <h3 className="text-xl font-semibold">{service.title}</h3>
+                                                    </div>
 
-                {/* Container do Carrossel */}
-                <div className="relative"> {/* Adicionando relative para o posicionamento das setas */}
-                    <Slider {...settings}>
-                        {services.map((item, index) => {
-                            // Constrói a mensagem automática do WhatsApp
-                            const whatsappMessage = encodeURIComponent(`Olá, gostaria de saber mais sobre o serviço de ${item.title}.`);
-                            const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`;
-                            
-                            return (
-                                <div key={index} className="px-3"> 
-                                    {/* Fundo do cartão em azul-escuro */}
-                                    <article className="bg-[#1e293b] text-white rounded-2xl p-6 space-y-4 h-full flex flex-col shadow-lg">
-                                        
-                                        {/* Ícone do Serviço */}
-                                        <item.icon className={`w-10 h-10 ${item.color}`} weight="fill" /> 
-                                        
-                                        {/* Título */}
-                                        <h3 className="text-xl font-semibold text-white">{item.title}</h3>
-                                        
-                                        {/* Descrição */}
-                                        <p className="text-gray-300">{item.description}</p>
-                                        
-                                        {/* BOTÃO WHATSAPP */}
-                                        <a
-                                            target='_blank'
-                                            // Corrigido o link para usar o WHATSAPP_NUMBER e a mensagem construída
-                                            href={whatsappLink} 
-                                            rel="noopener noreferrer"
-                                            className="mt-4 inline-flex items-center justify-center gap-2 
-                                                        bg-green-500 text-white font-medium px-4 py-2 
-                                                        rounded-lg transition duration-300 
-                                                        hover:bg-green-600"
-                                        >
-                                            <WhatsappLogo className="w-5 h-5" weight="bold" />
-                                            Solicitar
-                                        </a>
-
-                                    </article>
-                                </div>
-                            );
-                        })}
-                    </Slider>
+                                                    <p className="text-gray-300 flex-grow">{service.description}</p>
+                                                    
+                                                    <div className="pt-4 border-t border-gray-700">
+                                                        <p className="text-sm font-medium">Duração: {service.duration}</p>
+                                                        <p className="text-2xl font-bold text-green-400 mt-1">{service.price}</p>
+                                                    </div>
+                                                </CardContent>
+                                            </Card>
+                                    </CarouselItem>
+                                ))}
+                            </CarouselContent>
+                            <CarouselPrevious className="text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-50"/>
+                            <CarouselNext className="text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-50"/>
+                        </Carousel>
+                    </div>
                 </div>
-                
-                {/* Opcional: Adicionado uma pequena nota sobre o número para o usuário ver no código */}
-                <p className="text-center text-sm text-gray-400 mt-8">
-                    * Lembre-se de substituir o número de WhatsApp no código para que o botão funcione corretamente.
-                </p>
             </div>
         </section>
     )

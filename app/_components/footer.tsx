@@ -18,7 +18,7 @@ const brands = [
 export function Footer () {
     return (
         <section className='bg-[#E84c3d] py-16 text-white'>
-            <div className='conatiner mx auto-px-4'>
+            <div className='container mx-auto px-4'>
                 <div className='border-b border-white/20 pb-8'>
                     <h4 className='text-3xl font-semibold mb-8 text-center'>Nossos Parceiros</h4>
 
@@ -42,7 +42,7 @@ export function Footer () {
                     </div>
                 </div>
 
-                <footer className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 mt-5'>
+                <footer className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-16 mb-12 mt-5'>
                     <div>
                         <h3 className='text-2xl font-semibold mb-2'>Pet Shop Dev</h3>
                         <p className='mb-4'>Cuidando do seu melhor amigo com amor e dedicação.</p>
